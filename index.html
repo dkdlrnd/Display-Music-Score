@@ -6,37 +6,52 @@
     <title>악보 및 노래방 웹 애플리케이션</title>
 </head>
 <body>
-    <h1>노래방 웹 애플리케이션</h1>
+    <h1>악보 및 노래방 웹 애플리케이션</h1>
 
-    <!-- 원곡 및 TJ 노래방 링크 입력 폼 -->
-    <label for="originalLink">원곡 유튜브 링크:</label>
-    <input type="text" id="originalLink">
+    <!-- 원곡 및 TJ 노래방 유튜브 링크 입력 폼 -->
+    <label for="originalYoutubeLink">원곡 유튜브 링크:</label>
+    <input type="text" id="originalYoutubeLink" placeholder="https://www.youtube.com/watch?v=kCFDaE8DdyE">
     <br>
-    <label for="karaokeLink">TJ 노래방 유튜브 링크:</label>
-    <input type="text" id="karaokeLink">
+    <label for="tjKaraokeLink">TJ 노래방 유튜브 링크:</label>
+    <input type="text" id="tjKaraokeLink" placeholder="https://www.youtube.com/watch?v=JN5j01PbG2k">
     <br>
-    <button onclick="generateScoreAndPlayer()">악보 생성 및 재생</button>
+    <button onclick="generateScoreAndKaraoke()">악보 및 노래방 재생</button>
 
-    <!-- 악보 이미지와 노래방 플레이어 출력 영역 -->
-    <div id="score"></div>
-    <div id="player"></div>
+    <!-- 악보와 노래방 출력 영역 -->
+    <div id="scoreAndKaraoke">
+        <!-- 악보 이미지가 여기에 표시됩니다. -->
+        <img src="" alt="악보" id="scoreImage">
+        <!-- 유튜브 노래방 플레이어가 여기에 표시됩니다. -->
+        <iframe width="560" height="315" src="" frameborder="0" allowfullscreen id="karaokePlayer"></iframe>
+    </div>
 
     <script>
-        function generateScoreAndPlayer() {
-            // 원곡 및 TJ 노래방 링크 가져오기
-            const originalLink = document.getElementById("originalLink").value;
-            const karaokeLink = document.getElementById("karaokeLink").value;
+        // 악보 및 노래방 생성 함수
+        function generateScoreAndKaraoke() {
+            // 입력된 원곡 및 TJ 노래방 유튜브 링크 가져오기
+            const originalLink = document.getElementById("originalYoutubeLink").value;
+            const tjKaraokeLink = document.getElementById("tjKaraokeLink").value;
 
-            // 악보 이미지를 출력하는 코드
-            const scoreElement = document.getElementById("score");
-            scoreElement.innerHTML = `<img src="https://placekitten.com/300/200" alt="악보">`; // 여기에 실제 악보 이미지 경로를 넣으세요.
+            // 악보 이미지 URL (실제 악보 이미지 URL로 변경 필요)
+            const scoreImageUrl = "악보_이미지_URL.jpg"; // 이 부분을 실제 악보 이미지 URL로 대체하세요.
 
-            // 노래방 플레이어를 출력하는 코드
-            const playerElement = document.getElementById("player");
-            playerElement.innerHTML = `
-                <iframe width="560" height="315" src="${karaokeLink.replace("watch?v=", "embed/")}" frameborder="0" allowfullscreen></iframe>
-            `;
+            // 유튜브 노래방 플레이어 URL
+            const karaokePlayerUrl = `https://www.youtube.com/embed/${getVideoId(tjKaraokeLink)}`;
+
+            // 악보 이미지와 노래방 플레이어를 표시
+            const scoreImage = document.getElementById("scoreImage");
+            scoreImage.src = scoreImageUrl;
+
+            const karaokePlayer = document.getElementById("karaokePlayer");
+            karaokePlayer.src = karaokePlayerUrl;
+        }
+
+        // 유튜브 비디오 ID 추출 함수
+        function getVideoId(url) {
+            const regex = /[?&]v=([^?&]+)/;
+            const match = url.match(regex);
+            return match && match[1];
         }
     </script>
 </body>
-
+</html>
