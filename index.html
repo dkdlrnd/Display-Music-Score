@@ -6,7 +6,7 @@
     <title>악보 및 노래방 웹 애플리케이션</title>
 </head>
 <body>
-    <h1>악보 및 노래방 웹 애플리케이션</h1>
+    <h1>노래 악보 및 노래방 웹 애플리케이션</h1>
 
     <!-- 원곡 및 TJ 노래방 유튜브 링크 입력 폼 -->
     <label for="originalYoutubeLink">원곡 유튜브 링크:</label>
@@ -15,7 +15,7 @@
     <label for="tjKaraokeLink">TJ 노래방 유튜브 링크:</label>
     <input type="text" id="tjKaraokeLink" placeholder="https://www.youtube.com/watch?v=JN5j01PbG2k">
     <br>
-    <button onclick="generateScoreAndKaraoke()">악보 및 노래방 재생</button>
+    <button onclick="generateScoreAndKaraoke()">악보 및 노래방 출력</button>
 
     <!-- 악보와 노래방 출력 영역 -->
     <div id="scoreAndKaraoke">
@@ -32,10 +32,10 @@
             const originalLink = document.getElementById("originalYoutubeLink").value;
             const tjKaraokeLink = document.getElementById("tjKaraokeLink").value;
 
-            // 악보 이미지 URL (실제 악보 이미지 URL로 변경 필요)
+            // 악보 이미지 URL 설정 (실제 악보 이미지 URL로 변경 필요)
             const scoreImageUrl = "악보_이미지_URL.jpg"; // 이 부분을 실제 악보 이미지 URL로 대체하세요.
 
-            // 유튜브 노래방 플레이어 URL
+            // 유튜브 노래방 플레이어 URL 설정
             const karaokePlayerUrl = `https://www.youtube.com/embed/${getVideoId(tjKaraokeLink)}`;
 
             // 악보 이미지와 노래방 플레이어를 표시
