@@ -15,7 +15,7 @@
     <label for="tjKaraokeLink">TJ 노래방 유튜브 링크:</label>
     <input type="text" id="tjKaraokeLink" placeholder="https://www.youtube.com/watch?v=JN5j01PbG2k">
     <br>
-    
+
 	<!-- 추가: 가사 입력 폼 -->
 	<label for="lyrics">가사:</label><br/>
 	<textarea id="lyrics" rows=10 cols=50></textarea><br/>
@@ -32,4 +32,53 @@
   	<div id='scoreAndKaraoke'>
         <!-- 악보 이미지가 여기에 표시됩니다. -->
         <img src="" alt="" id='scoreImage'>
-        <!-- 유튜브
+        <!-- 유튜브 노래방 플레이어가 여기에 표시됩니다. -->
+        <iframe width='560' height='315' src='' frameborder='0' allowfullscreen='' id='karaokePlayer'></iframe>
+   </div>
+
+   <!-- 스타일 시트 추가 (옵션)-->
+   <style>
+       #scoreAndKaraoke {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+       }
+       #scoreImage {
+           margin-bottom: 20px;
+       }
+   </style>
+
+   <!-- 스크립트 추가 (옵션)-->
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+   
+   <!-- 악보 및 노래방 생성 함수 -->
+   <script type = "text/javascript">
+
+      // 가사 재생 함수
+      function playLyrics() {
+          var lyrics = document.getElementById('lyrics').value.split('\n');
+          var currentLyricsDiv = document.getElementById('currentLyrics');
+          currentLyricsDiv.innerHTML = '';
+          
+          var i = 0;
+          var intervalId = setInterval(function() {
+              if (i >= lyrics.length) {
+                  clearInterval(intervalId);
+                  return;
+              }
+              
+              currentLyricsDiv.innerHTML += lyrics[i] + '<br>';
+              i++;
+          }, 2000); // 각 줄마다 2초 간격으로 출력합니다.
+      }
+
+      // 악보 및 노래방 생성 함수
+      function generateScoreAndKaraoke() {
+          // 입력된 원곡 및 TJ 노래방 유튜브 링크 가져오기
+          const originalLink = document.getElementById("originalYoutubeLink").value;
+          const tjKaraokeLink = document.getElementById("tjKaraokeLink").value;
+
+          // 실제 악보 이미지 URL (이 부분을 실제 URL로 대체하세요)
+          const scoreImageUrl = "https://example.com/score.jpg";
+
+          // 유튜브
