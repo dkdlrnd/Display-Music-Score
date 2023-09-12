@@ -14,7 +14,7 @@
     <br>
     <label for="tjKaraokeLink">TJ 노래방 유튜브 링크:</label>
     <input type="text" id="tjKaraokeLink" placeholder="https://www.youtube.com/watch?v=JN5j01PbG2k">
-    <br>
+	<br>
 
 	<!-- 추가: 가사 입력 폼 -->
 	<label for="lyrics">가사:</label><br/>
@@ -25,16 +25,6 @@
 
 	<!-- 추가: 현재 가사 표시 영역 -->
 	<div id='currentLyrics'></div>
-
-	<hr/>
-
-	<!-- 기존의 악보와 노래방 출력 영역 -->
-  	<div id='scoreAndKaraoke'>
-        <!-- 악보 이미지가 여기에 표시됩니다. -->
-        <img src="" alt="" id='scoreImage'>
-        <!-- 유튜브 노래방 플레이어가 여기에 표시됩니다. -->
-        <iframe width='560' height='315' src='' frameborder='0' allowfullscreen='' id='karaokePlayer'></iframe>
-   </div>
 
    <!-- 스타일 시트 추가 (옵션)-->
    <style>
@@ -56,7 +46,8 @@
 
       // 가사 재생 함수
       function playLyrics() {
-          var lyrics = document.getElementById('lyrics').value.split('\n');
+          var lyrics = document.getElementById('lyrics').value.split('
+');
           var currentLyricsDiv = document.getElementById('currentLyrics');
           currentLyricsDiv.innerHTML = '';
           
@@ -73,12 +64,47 @@
       }
 
       // 악보 및 노래방 생성 함수
-      function generateScoreAndKaraoke() {
+      function generateScoreAndKaraoke(songId) {
           // 입력된 원곡 및 TJ 노래방 유튜브 링크 가져오기
           const originalLink = document.getElementById("originalYoutubeLink").value;
-          const tjKaraokeLink = document.getElementById("tjKaraokeLink").value;
 
-          // 실제 악보 이미지 URL (이 부분을 실제 URL로 대체하세요)
-          const scoreImageUrl = "https://example.com/score.jpg";
+		  // songId에 따라 악보 이미지 URL과 TJ노래방 유튜브 링크 설정하기
+		  let scoreImageUrl = "";
+		  let tjKaraokeLink = "";
 
-          // 유튜브
+		  if (songId === 1) {
+		      scoreImageUrl = "https://example.com/score1.jpg";
+		      tjKaraokeLink = "https://www.youtube.com/watch?v=ABC123";
+		  } else if (songId === 2) {
+		      scoreImageUrl = "https://example.com/score2.jpg";
+		      tjKaraokeLink =" https://www.youtube.com/watch?v=DEF456";
+		  }
+
+          // 악보 이미지와 노래방 플레이어 업데이트
+	      const scoreImage = document.getElementById("scoreImage");
+	      scoreImage.src = scoreImageUrl;
+
+	      const karaokePlayerUrl =" https://www.youtube.com/embed/" + getVideoId(tjKaraokeLink);
+	      const karaokePlayer=document.getElementById("karaokePlayer");
+	      karaokePlayer.src=karaokePlayerUrl;    
+	  }
+
+	  function getVideoId(url){
+	    	var video_id=url.split('v=')[1];
+	    	var ampersandPosition=video_id.indexOf('&');
+	    	if(ampersandPosition!=-1){
+	    		video_id=video_id.substring(0, ampersandPosition);
+	    	}
+	    	return video_id;        
+	  }
+
+	  </script>
+
+
+	  
+
+	  <!-- 기존의 악보와 노래방 출력 영역 -->
+  	  <div id='scoreAndKaraoke'>
+        <!-- 악보 이미지가 여기에 표시됩니다. -->
+        <img src="" alt="" id='scoreImage'>
+        <!-- 유튜브
